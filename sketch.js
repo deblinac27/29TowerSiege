@@ -7,7 +7,7 @@ var ground, stand;
 var block;
 var polygon;
 function preload(){
-
+  polygon_img = loadImage("hexagon.png")
 }
 function setup() {
   var canvas = createCanvas(800,400);
@@ -55,12 +55,12 @@ function setup() {
   block25 = new Box(621, 46, 30, 40);
 
   var polygon_options={
-    restitution: 1.0
+    restitution: 0.05,
+    mass:5
   }
   polygon = Bodies.circle(50,200,20,polygon_options);
-  polygon_img = loadImage("hexagon.png")
+  console.log(polygon);
   World.add(world,polygon);
-
   slingshot = new SlingShot(this.polygon, {x:100, y:200});
 }
 
@@ -108,7 +108,7 @@ function draw() {
 }
 
 function mouseDragged(){
-  Matter.Body.setPosition(polygon.body,{x:mouseX, y:mouseY});
+  Matter.Body.setPosition(this.polygon,{x:mouseX, y:mouseY});
 }
 
 function mouseReleased(){
